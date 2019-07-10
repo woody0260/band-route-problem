@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript" src="./main.js"></script>
+</head>
+<body>
+
+<h1>Henry Wood - Band Route Problem</h1>
+<p>Solved using simulated annealing heuristic approach</p>
+<p>Key: Home point is - <div id="keyCircle"></div></p>
+
+<button id="solveBtn" type="button" onclick="simulatedAnnealingSolution()">Solve!</button>
+
+<div id="resultsContainer" style="display: flex">
+	<div>
+<div style="position: relative;">
+ <canvas id="layer1" width="950" height="675" 
+   style="position: absolute; left: 0; top: 0; z-index: 1; border:1px solid #000000;"></canvas>
+ <canvas id="layer2" width="950" height="675" 
+   style="position: absolute; left: 0; top: 0; z-index: 0;"></canvas>
+</div>
+</div>
+<div id='distance'><div>
+<div id='arrayResult'><div>
+</div>
+
+</body>
+</html>
