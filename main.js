@@ -20,9 +20,10 @@ let points500 = [{"x":780,"y":560},{"x":631,"y":173},{"x":452,"y":237},{"x":789,
 {"x":201,"y":387},{"x":373,"y":357},{"x":112,"y":322},{"x":867,"y":472},{"x":381,"y":633},{"x":467,"y":234},{"x":134,"y":63},{"x":533,"y":468},{"x":6,"y":185},{"x":574,"y":362},{"x":311,"y":451},{"x":100,"y":572},{"x":318,"y":47},{"x":114,"y":650},{"x":704,"y":641},{"x":375,"y":355},{"x":693,"y":391},{"x":549,"y":154},{"x":355,"y":167},{"x":340,"y":493},{"x":17,"y":98},{"x":331,"y":179},{"x":667,"y":431},{"x":231,"y":460},{"x":335,"y":270},{"x":351,"y":0},{"x":843,"y":449},{"x":785,"y":1},{"x":306,"y":86},{"x":302,"y":496},{"x":790,"y":236},{"x":69,"y":49},{"x":732,"y":160},{"x":515,"y":73},{"x":342,"y":253},{"x":150,"y":579},{"x":126,"y":317},{"x":272,"y":432},{"x":482,"y":301},{"x":607,"y":622},{"x":158,"y":53},
 {"x":711,"y":480},{"x":652,"y":193},{"x":681,"y":151},{"x":828,"y":359},{"x":563,"y":71},{"x":70,"y":138},{"x":755,"y":192},{"x":636,"y":133}];
 
-let pointsUsed = points500;
-let steps = 10000;
-let length = pointsUsed.length;
+let pointsArray = [points40, points200, points500];
+let pointsUsed;
+let steps;
+let length;
 let adjacencyMatrix;
 let traversalPath = [];
 
@@ -35,11 +36,24 @@ let ctx2 = null;
 let finalDistance = null;
 let finalArray = [];
 
+
 function simulatedAnnealingSolution() {
+    let iterations = document.getElementById('numInput').value;
+    steps = iterations || 100000;
+    let radios = document.getElementsByName('points');
+    for (var i = 0; i < radios.length; i++) {
+        if (radios[i].checked) {
+            pointsUsed = pointsArray[i]
+            length = pointsUsed.length
+            break;
+         }
+    }
     canvas1 = document.getElementById('layer1')
     ctx1 = canvas1.getContext("2d");
     canvas2 = document.getElementById('layer2')
     ctx2 = canvas2.getContext("2d");
+    ctx1.clearRect(0,0,900,900);
+    ctx2.clearRect(0,0,900,900);
     drawPoints();
     createAdjacencyMatrix();
     simulatedAnnealing();
@@ -98,7 +112,8 @@ let simulatedAnnealing = function () {
         
     }
     document.getElementById('distance').innerHTML = "Total distance: "+Math.floor(distance);
-    finalArray = traversalPath.slice();
+    document.getElementById('downloadBtn').style.display = 'block';
+
 };
 
 let createFirstPath = function () {
@@ -128,12 +143,14 @@ let swapFunction = function(array, posA, posB) {
 }
 
 let draw = function(ctx) {
+    finalArray = [{'x': pointsUsed[0].x, 'y': pointsUsed[0].y}];
     ctx.beginPath();
     ctx.moveTo(pointsUsed[0].x, pointsUsed[0].y);
     for (var i = 0; i < traversalPath.length; i++){
-        var p0 = pointsUsed[traversalPath[i+1]];
-        if (p0) {
-            ctx2.lineTo(p0.x, p0.y);
+        var newPoint = pointsUsed[traversalPath[i+1]];
+        if (newPoint) {
+            ctx2.lineTo(newPoint.x, newPoint.y);
+            finalArray.push({'x': newPoint.x, 'y': newPoint.y})
         } else {
             ctx2.lineTo(pointsUsed[0].x, pointsUsed[0].y);
         }
@@ -156,4 +173,10 @@ let drawPoints = function() {
         ctx1.stroke();
         ctx1.closePath();
     }
+}
+
+let downloadResult = function() {
+    let json = JSON.stringify(finalArray);
+    let blob = new Blob([json], {type: "application/json"});
+    saveAs(blob, "result.json");
 }

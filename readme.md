@@ -27,4 +27,9 @@ If you have questions on the challenge, please contact Jared Sartin: jared@leftf
 
 # Candidate Notes:
 
-### Fill in comments, external tool usage, and time tracking
+Spent around 4 and a half hours on this challenge.
+Just over 3.5 hours on research + javascript, around an hour on html/css.
+A bit pressed for time so unfortunately it only really looks suitable on desktop, not mobile.
+Only library used is a FileSaver one, and other script used is a google font.
+I used a simulated annealing approach as brute force, or even dynamic programming with memoization would struggle with the number of points.
+There are other heuristic approaches but this seemed to be the most recommended as it is less greedy.

@@ -1,0 +1,77 @@
+body {
+	background-color: gainsboro;
+	font-family: Poppins
+}
+
+	#solveBtn {
+		margin-bottom: 10px;
+	}
+
+	#rightCol {
+		float: right;
+		font-size: 26px;
+    	margin-right: 25px;
+	}
+
+	#resultsContainer {
+		display: flex;
+		flex-direction: column;
+	}
+
+	#distance {
+		margin-bottom: 10px;
+	}
+
+	#downloadBtn {
+		display: none;
+	}
+
+	#key {
+		display:flex;
+	}
+
+	#keyCircle {
+		height: 10px;
+		width: 10px;
+		background-color: #ff2626;
+		border-radius: 50%;
+		display: inline-block;
+		border: 1px solid black;
+		align-self: center;
+		margin-left: 5px;
+	}
+
+	#canvasWrap {
+		position: relative;
+	}
+
+	#layer1 {
+		position: absolute;
+		left: 0;
+		top: 0;
+		z-index: 1;
+		border:1px solid #000000;
+	}
+
+	#layer2 {
+		position: absolute;
+		left: 0;
+		top: 0;
+		z-index: 0;
+	}
+
+	.button {
+		background-color: cadetblue;
+		border: none;
+		color: white;
+		padding: 10px 10px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+		cursor: pointer;
+	}
+
+	#numInput {
+		margin-bottom: 5px;
+	}
